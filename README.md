@@ -1,1 +1,2 @@
-# Flutter_Furniture_App
+# Ecommerce_App
+ An Ecommerce App built using Flutter with Firebase.
