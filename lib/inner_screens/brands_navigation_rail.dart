@@ -208,11 +208,6 @@ class ContentSpace extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     final productsBrand = productsData.findByBrand(brand);
-    if (brand == 'All') {
-      for (int i = 0; i < productsData.products.length; i++) {
-        productsBrand.add(productsData.products[i]);
-      }
-    }
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 8, 0, 0),
@@ -223,7 +218,7 @@ class ContentSpace extends StatelessWidget {
             itemCount: productsBrand.length,
             itemBuilder: (BuildContext context, int index) =>
                 ChangeNotifierProvider.value(
-                    value: productsBrand[index], child: BrandsNavigationRail()),
+                  value: productsBrand[index], child: BrandsNavigationRail()),
           ),
         ),
       ),

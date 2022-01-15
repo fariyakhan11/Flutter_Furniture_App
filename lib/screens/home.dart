@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/consts/colors.dart';
 import 'package:ecommerce_app/inner_screens/brands_navigation_rail.dart';
 import 'package:ecommerce_app/provider/products.dart';
-import 'package:ecommerce_app/screens/feeds.dart';
 import 'package:ecommerce_app/screens/popular_products.dart';
 import 'package:ecommerce_app/widgets/backlayer.dart';
 import 'package:ecommerce_app/widgets/category.dart';
@@ -59,8 +58,7 @@ class _HomeState extends State<Home> {
                 backgroundColor: Colors.white,
                 child: CircleAvatar(
                   radius: 13,
-                  backgroundImage: NetworkImage(
-                      'https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg'),
+                  backgroundImage: NetworkImage('https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg'),
                 ),
               ),
               onPressed: () {},
@@ -93,14 +91,12 @@ class _HomeState extends State<Home> {
                           //rev erse: true
                           //reverse: true,
                           autoPlayInterval: Duration(seconds: 5),
-
                           onPageChanged: (index, reason) =>
                               setState(() => activeIndex = index),
                         ),
                         itemCount: _carouselIcons.length,
                         itemBuilder: (context, index, realIndex) {
                           final icon = _carouselIcons[index];
-
                           return buildImage(icon, index);
                         },
                       ),
@@ -148,12 +144,11 @@ class _HomeState extends State<Home> {
                           },
                         );
                       },
-                      child: Text(
-                        'View all...',
+                      child: Text('View all',
                         style: TextStyle(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             fontSize: 15,
-                            color: Colors.red),
+                            color: Colors.purple),
                       ),
                     )
                   ],
@@ -195,22 +190,18 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Text(
-                      'Popular Products',
+                    Text('Popular Products',
                       style:
                           TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
                     ),
                     Spacer(),
                     FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(Feeds.routeName, arguments: 'popular');
-                      },
-                      child: Text(
-                        'View all...',
+                      onPressed: () {},
+                      child: Text('View all',
                         style: TextStyle(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             fontSize: 15,
-                            color: Colors.red),
+                            color: Colors.purple),
                       ),
                     )
                   ],
@@ -227,11 +218,11 @@ class _HomeState extends State<Home> {
                       return ChangeNotifierProvider.value(
                         value: popularItems[index],
                         child: PopularProducts(
-                            // imageUrl: popularItems[index].imageUrl,
-                            // title: popularItems[index].title,
-                            // description: popularItems[index].description,
-                            // price: popularItems[index].price,
-                            ),
+                          // imageUrl: popularItems[index].imageUrl,
+                          // title: popularItems[index].title,
+                          // description: popularItems[index].description,
+                          // price: popularItems[index].price,
+                        ),
                       );
                     }),
               )
@@ -255,9 +246,9 @@ class _HomeState extends State<Home> {
         activeIndex: activeIndex,
         count: _carouselIcons.length,
         effect: SlideEffect(
-          dotWidth: 20,
-          dotHeight: 20,
-          activeDotColor: Colors.red,
+          dotWidth: 15,
+          dotHeight: 15,
+          activeDotColor: Colors.purple,
           dotColor: Colors.black12,
         ), // SlideEffect
       );

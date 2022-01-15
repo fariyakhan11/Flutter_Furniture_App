@@ -122,7 +122,7 @@ class BackLayerMenu extends StatelessWidget {
                     ctx: context,
                     text: 'Cart',
                     index: 1,
-                    routeName: CartScreen.routeName),
+                    routeName: Cart.routeName),
                 const SizedBox(height: 10.0),
                 content(
                     ctx: context,

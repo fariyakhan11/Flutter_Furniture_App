@@ -9,7 +9,7 @@ class CategoriesFeedsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<Products>(context, listen: false);
-    final categoryName = ModalRoute.of(context)!.settings.arguments as String;
+    final categoryName = ModalRoute.of(context)?.settings.arguments as String;
     final productsList = productsProvider.findByCategory(categoryName);
     return Scaffold(
         // body: FeedProducts(),
