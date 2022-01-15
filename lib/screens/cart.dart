@@ -1,37 +1,61 @@
 import 'package:ecommerce_app/consts/colors.dart';
 import 'package:ecommerce_app/consts/my_icons.dart';
+import 'package:ecommerce_app/provider/cart_provider.dart';
+import 'package:ecommerce_app/services/global_methods.dart';
 import 'package:ecommerce_app/widgets/cart_full.dart';
 import 'package:ecommerce_app/widgets/empty_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Cart extends StatelessWidget {
-  static const routeName = '/Cart';
+class CartScreen extends StatelessWidget {
+  static const routeName = '/CartScreen';
 
   @override
   Widget build(BuildContext context) {
-    List products = [];
-    return !products.isEmpty
+    GlobalMethods globalMethods = GlobalMethods();
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    return cartProvider.getCartItems.isEmpty
         ? Scaffold(body: CartEmpty())
         : Scaffold(
-        bottomSheet: checkoutSection(context),
-        appBar: AppBar(
-          title: Text('Cart Items Count'),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(MyAppIcons.trash),
-            )
-          ],
-        ),
-        body: Container(
-          margin: EdgeInsets.only(bottom: 60),
-          child: ListView.builder(itemCount: 5,itemBuilder: (BuildContext ctx, int index){
-            return CartFull();
-          }),
-        ));
+            bottomSheet: checkoutSection(context, cartProvider.totalAmount),
+            appBar: AppBar(
+              title: Text('Cart (${cartProvider.getCartItems.length})'),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    globalMethods.showDialogg(
+                        'Clear cart',
+                        'Are you sure you want to empty the cart!',
+                        () => cartProvider.clearCart(), context);
+                  },
+                  icon: Icon(MyAppIcons.trash),
+                )
+              ],
+            ),
+            body: Container(
+              margin: EdgeInsets.only(bottom: 60),
+              child: ListView.builder(
+                  itemCount: cartProvider.getCartItems.length,
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return ChangeNotifierProvider.value(
+                      value: cartProvider.getCartItems.values.toList()[index],
+                      child: CartFull(
+                        productId:
+                            cartProvider.getCartItems.keys.toList()[index],
+                        // id: cartProvider.getCartItems.values.toList()[index].id,
+                        // productId: cartProvider.getCartItems.keys.toList()[index],
+                        // price: cartProvider.getCartItems.values.toList()[index].price,
+                        // title: cartProvider.getCartItems.values.toList()[index].title,
+                        // imageUrl: cartProvider.getCartItems.values.toList()[index].imageUrl,
+                        // quantity: cartProvider.getCartItems.values.toList()[index].quantity,
+                      ),
+                    );
+                  }),
+            ));
   }
 
-  Widget checkoutSection(BuildContext ctx) {
+  Widget checkoutSection(BuildContext ctx, double subtotal) {
     return Container(
         decoration: BoxDecoration(
           border: Border(
@@ -57,7 +81,6 @@ class Cart extends StatelessWidget {
                     ]),
                   ),
                   child: Material(
-
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(30),
@@ -86,7 +109,7 @@ class Cart extends StatelessWidget {
                     fontWeight: FontWeight.w600),
               ),
               Text(
-                'US \$179.0',
+                'US \$${subtotal.toStringAsFixed(2)}',
                 //textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.blue,

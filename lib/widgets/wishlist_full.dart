@@ -1,7 +1,14 @@
 import 'package:ecommerce_app/consts/colors.dart';
+import 'package:ecommerce_app/models/fav_attr.dart';
+import 'package:ecommerce_app/provider/favs_provider.dart';
+import 'package:ecommerce_app/services/global_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WishlistFull extends StatefulWidget {
+  final String productId;
+
+  const WishlistFull({this.productId = ''});
   @override
   _WishlistFullState createState() => _WishlistFullState();
 }
@@ -9,6 +16,7 @@ class WishlistFull extends StatefulWidget {
 class _WishlistFullState extends State<WishlistFull> {
   @override
   Widget build(BuildContext context) {
+    final favsAttr = Provider.of<FavsAttr>(context);
     return Stack(
       children: <Widget>[
         Container(
@@ -26,8 +34,7 @@ class _WishlistFullState extends State<WishlistFull> {
                   children: <Widget>[
                     Container(
                       height: 80,
-                      child: Image.network(
-                          'https://cdn.pixabay.com/photo/2017/08/02/01/01/living-room-2569325__340.jpg'),
+                      child: Image.network(favsAttr.imageUrl),
                     ),
                     SizedBox(
                       width: 10.0,
@@ -37,7 +44,7 @@ class _WishlistFullState extends State<WishlistFull> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'title',
+                            favsAttr.title,
                             style: TextStyle(
                                 fontSize: 16.0, fontWeight: FontWeight.bold),
                           ),
@@ -45,7 +52,7 @@ class _WishlistFullState extends State<WishlistFull> {
                             height: 20.0,
                           ),
                           Text(
-                            "\$ 16",
+                            "\$ ${favsAttr.price}",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18.0),
                           ),
@@ -58,12 +65,14 @@ class _WishlistFullState extends State<WishlistFull> {
             ),
           ),
         ),
-        positionedRemove(),
+        positionedRemove(widget.productId),
       ],
     );
   }
 
-  Widget positionedRemove() {
+  Widget positionedRemove(String productId) {
+    GlobalMethods globalMethods = GlobalMethods();
+    final favsProvider = Provider.of<FavsProvider>(context);
     return Positioned(
       top: 20,
       right: 15,
@@ -72,14 +81,20 @@ class _WishlistFullState extends State<WishlistFull> {
         width: 30,
         child: MaterialButton(
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           padding: EdgeInsets.all(0.0),
           color: ColorConsts.favColor,
           child: Icon(
             Icons.clear,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            globalMethods.showDialogg(
+                'Remove Wish',
+                'Are you sure you want to remove this item from wishlist!',
+                () => favsProvider.removeItem(productId),
+                context);
+          },
         ),
       ),
     );

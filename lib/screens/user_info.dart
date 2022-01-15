@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/consts/colors.dart';
 import 'package:ecommerce_app/consts/my_icons.dart';
 import 'package:ecommerce_app/provider/dark_theme_provider.dart';
+import 'package:ecommerce_app/screens/cart.dart';
 import 'package:ecommerce_app/screens/wishlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -140,7 +141,9 @@ class _UserInfoState extends State<UserInfo> {
                         ),
                       ),
                       ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed(CartScreen.routeName);
+                        },
                         title: Text('Cart'),
                         trailing: Icon(Icons.chevron_right_rounded),
                         leading: Icon(FontAwesome5.shopping_cart),
