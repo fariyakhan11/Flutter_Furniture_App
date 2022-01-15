@@ -5,7 +5,6 @@ import 'package:badges/badges.dart';
 import 'package:provider/provider.dart';
 
 class FeedProducts extends StatefulWidget {
-  
   @override
   _FeedProductsState createState() => _FeedProductsState();
 }
@@ -17,7 +16,7 @@ class _FeedProductsState extends State<FeedProducts> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, ProductDetails.routeName),
+        onTap: () => Navigator.pushNamed(context, ProductDetails.routeName, arguments: productsAttributes.id),
         child: Container(
           width: 250,
           height: 290,

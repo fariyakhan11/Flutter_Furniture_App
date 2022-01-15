@@ -637,9 +637,14 @@ class Products with ChangeNotifier {
     return _products; // [..._products] for older flutter version
   }
 
-  List<Product> get popularProducts{
+  List<Product> get popularProducts {
     return _products.where((element) => element.isPopular).toList();
   }
+
+  Product findById(String productId) {
+    return _products.firstWhere((element) => element.id == productId);
+  }
+
   List<Product> findByCategory(String categoryName) {
     List<Product> _categoryList = _products
         .where((element) => element.productCategoryName
@@ -651,9 +656,8 @@ class Products with ChangeNotifier {
 
   List<Product> findByBrand(String brandName) {
     List<Product> _categoryList = _products
-        .where((element) => element.brand
-            .toLowerCase()
-            .contains(brandName.toLowerCase()))
+        .where((element) =>
+            element.brand.toLowerCase().contains(brandName.toLowerCase()))
         .toList();
     return _categoryList;
   }

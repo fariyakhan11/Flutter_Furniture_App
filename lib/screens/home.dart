@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/consts/colors.dart';
 import 'package:ecommerce_app/inner_screens/brands_navigation_rail.dart';
 import 'package:ecommerce_app/provider/products.dart';
+import 'package:ecommerce_app/screens/feeds.dart';
 import 'package:ecommerce_app/screens/popular_products.dart';
 import 'package:ecommerce_app/widgets/backlayer.dart';
 import 'package:ecommerce_app/widgets/category.dart';
@@ -201,7 +202,9 @@ class _HomeState extends State<Home> {
                     ),
                     Spacer(),
                     FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(Feeds.routeName, arguments: 'popular');
+                      },
                       child: Text(
                         'View all...',
                         style: TextStyle(
@@ -224,11 +227,11 @@ class _HomeState extends State<Home> {
                       return ChangeNotifierProvider.value(
                         value: popularItems[index],
                         child: PopularProducts(
-                          // imageUrl: popularItems[index].imageUrl,
-                          // title: popularItems[index].title,
-                          // description: popularItems[index].description,
-                          // price: popularItems[index].price,
-                        ),
+                            // imageUrl: popularItems[index].imageUrl,
+                            // title: popularItems[index].title,
+                            // description: popularItems[index].description,
+                            // price: popularItems[index].price,
+                            ),
                       );
                     }),
               )
