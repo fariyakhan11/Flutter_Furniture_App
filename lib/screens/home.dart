@@ -149,11 +149,11 @@ class _HomeState extends State<Home> {
                         );
                       },
                       child: Text(
-                        'View all...',
+                        'View all',
                         style: TextStyle(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             fontSize: 15,
-                            color: Colors.red),
+                            color: Colors.purple),
                       ),
                     )
                   ],
@@ -203,14 +203,15 @@ class _HomeState extends State<Home> {
                     Spacer(),
                     FlatButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(Feeds.routeName, arguments: 'popular');
+                        Navigator.of(context)
+                            .pushNamed(Feeds.routeName, arguments: 'popular');
                       },
                       child: Text(
-                        'View all...',
+                        'View all',
                         style: TextStyle(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             fontSize: 15,
-                            color: Colors.red),
+                            color: Colors.purple),
                       ),
                     )
                   ],
@@ -255,10 +256,10 @@ class _HomeState extends State<Home> {
         activeIndex: activeIndex,
         count: _carouselIcons.length,
         effect: SlideEffect(
-          dotWidth: 20,
-          dotHeight: 20,
-          activeDotColor: Colors.red,
-          dotColor: Colors.black12,
+          dotWidth: 16,
+          dotHeight: 16,
+          activeDotColor: Colors.purple,
+          dotColor: Colors.grey,
         ), // SlideEffect
       );
 }
