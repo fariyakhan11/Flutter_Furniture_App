@@ -21,18 +21,19 @@ class _HomeState extends State<Home> {
   int activeIndex = 0;
 
   List _carouselIcons = [
-    'https://cdn.pixabay.com/photo/2021/12/11/07/59/hotel-6862159__340.jpg',
-    'https://cdn.pixabay.com/photo/2021/01/06/09/19/dresden-5893714__340.jpg',
-    'https://cdn.pixabay.com/photo/2021/12/28/04/12/snow-6898585__340.jpg',
-    'https://cdn.pixabay.com/photo/2021/12/19/10/42/old-6880626__340.jpg',
-    'https://cdn.pixabay.com/photo/2021/12/21/09/40/dogs-6884916__340.jpg'
+    'https://uswitch-mobiles-contentful.imgix.net/qhi9fkhtpbo3/2GIVGhGnGinAavm4lhYQ9b/0c004c14510b584b0e627f4be634b7e4/Cost_of_smart_phones.jpg?w=770&h=370&fit=crop', //phone
+    'https://www.teahub.io/photos/full/2-20558_m2-minotti-furniture-ads.png', //furniture
+    'https://review.chinabrands.com/chinabrands/seo/image/20181025/Dropship%20Health%20and%20Beauty%20Products.jpg',
+    'https://hhjewels.com/media/wysiwyg/pages/designers/mont-blanc/banner.jpg', //watch
+    'https://cdn.psdrepo.com/images/2x/nike-free-psd-p1.jpg' //shoes
   ];
 
   List _brandImages = [
-    'https://cdn.pixabay.com/photo/2021/12/11/07/59/hotel-6862159__340.jpg',
-    'https://cdn.pixabay.com/photo/2021/01/06/09/19/dresden-5893714__340.jpg',
-    'https://cdn.pixabay.com/photo/2021/12/28/04/12/snow-6898585__340.jpg',
-    'https://cdn.pixabay.com/photo/2021/12/19/10/42/old-6880626__340.jpg',
+    'https://img.wallpapersafari.com/desktop/800/450/23/46/ZyMYhE.jpg', //apple
+    'https://i.pinimg.com/originals/c2/61/72/c261727beed1ae04d06e4d1a2074770f.jpg', //nike
+    'http://dwglogo.com/wp-content/uploads/2015/11/White-Logo-of-Dell1.png', //dell
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh8mIb-UCo4ZkT648K1Mx5SjKjyeD8cKXsC4VbqgMuC8nrsZyyu1FDI0RxYJxqg6HFHnk&usqp=CAU', //hm
+
   ];
 
   @override
@@ -48,7 +49,8 @@ class _HomeState extends State<Home> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [ColorConsts.starterColor, ColorConsts.endcolor])),
+                    colors: [ColorConsts.starterColor,
+                             ColorConsts.endcolor])),
           ),
           actions: <Widget>[
             IconButton(
@@ -92,7 +94,7 @@ class _HomeState extends State<Home> {
                           //enableInfiniteScroll: false,
                           //rev erse: true
                           //reverse: true,
-                          autoPlayInterval: Duration(seconds: 5),
+                          autoPlayInterval: Duration(seconds: 2),
 
                           onPageChanged: (index, reason) =>
                               setState(() => activeIndex = index),
@@ -148,12 +150,12 @@ class _HomeState extends State<Home> {
                           },
                         );
                       },
-                      child: Text(
-                        'View all',
+                      child: Text('View all',
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 15,
-                            color: Colors.purple),
+                            color: Color(0xFF6a5acd)
+                        ),
                       ),
                     )
                   ],
@@ -211,7 +213,8 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 15,
-                            color: Colors.purple),
+                            color: Color(0xFF6a5acd)
+                        ),
                       ),
                     )
                   ],
@@ -258,7 +261,7 @@ class _HomeState extends State<Home> {
         effect: SlideEffect(
           dotWidth: 16,
           dotHeight: 16,
-          activeDotColor: Colors.purple,
+          activeDotColor: Color(0xFFbf94e4),
           dotColor: Colors.grey,
         ), // SlideEffect
       );

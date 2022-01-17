@@ -7,7 +7,7 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Text('Search')
+          child: Text('Search'),
       ),
     );
   }

@@ -21,7 +21,7 @@ class _WishlistFullState extends State<WishlistFull> {
       children: <Widget>[
         Container(
           width: double.infinity,
-          margin: EdgeInsets.only(right: 30.0, bottom: 10.0),
+          margin: EdgeInsets.only(right: 30.0, top: 20.0, left: 10.0),
           child: Material(
             color: Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.circular(5.0),
@@ -74,8 +74,8 @@ class _WishlistFullState extends State<WishlistFull> {
     GlobalMethods globalMethods = GlobalMethods();
     final favsProvider = Provider.of<FavsProvider>(context);
     return Positioned(
-      top: 20,
-      right: 15,
+      top: 30,
+      right: 20,
       child: Container(
         height: 30,
         width: 30,

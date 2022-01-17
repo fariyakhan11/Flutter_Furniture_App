@@ -93,12 +93,12 @@ class _CartFullState extends State<CartFull> {
                                       .removeItem(widget.productId), context);
                             },
                             child: Container(
-                              height: 50,
+                              height: 55,
                               width: 50,
                               child: Icon(
                                 FontAwesome5.times,
-                                color: Colors.red,
-                                size: 22,
+                                color: Color(0xffef1919),
+                                size: 20,
                               ),
                             ),
                           ),
@@ -111,10 +111,11 @@ class _CartFullState extends State<CartFull> {
                         SizedBox(
                           width: 5,
                         ),
-                        Text(
-                          '${cartAttr.price}\$',
+                        Text('${cartAttr.price}\$',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.cyan),
                         ),
                       ],
                     ),
@@ -128,10 +129,10 @@ class _CartFullState extends State<CartFull> {
                           child: Text(
                             '${subTotal.toStringAsFixed(2)}\$',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w600,
                                 color: themeChange.darkTheme
-                                    ? Colors.brown.shade900
+                                    ? Colors.cyan
                                     : Theme.of(context).accentColor),
                           ),
                         ),
@@ -141,10 +142,12 @@ class _CartFullState extends State<CartFull> {
                       children: [
                         Text(
                           'Ships Free',
-                          style: TextStyle(
+                          style: TextStyle( fontWeight: FontWeight.w500, fontSize: 14,
                               color: themeChange.darkTheme
-                                  ? Colors.brown.shade900
-                                  : Theme.of(context).accentColor),
+                                  ? Colors.black
+                                  : Theme.of(context).accentColor
+                          ),
+
                         ),
                         Spacer(),
                         Material(
@@ -160,13 +163,13 @@ class _CartFullState extends State<CartFull> {
                                   },
                             child: Container(
                               child: Padding(
-                                padding: const EdgeInsets.all(5.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Icon(
                                   FontAwesome5.minus,
                                   color: cartAttr.quantity < 2
-                                      ? Colors.grey
+                                      ? Colors.black
                                       : Colors.red,
-                                  size: 22,
+                                  size: 17,
                                 ),
                               ),
                             ),
@@ -175,16 +178,14 @@ class _CartFullState extends State<CartFull> {
                         Card(
                           elevation: 12,
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.12,
+                            width: MediaQuery.of(context).size.width * 0.11,
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                               gradient: LinearGradient(colors: [
                                 ColorConsts.gradiendLStart,
                                 ColorConsts.gradiendLEnd,
-                              ], stops: [
-                                0.0,
-                                0.7
-                              ]),
+                              ], stops: [0.0,
+                                         0.8]),
                             ),
                             child: Text(
                               '${cartAttr.quantity}',
@@ -209,8 +210,8 @@ class _CartFullState extends State<CartFull> {
                                 padding: const EdgeInsets.all(5.0),
                                 child: Icon(
                                   FontAwesome5.plus,
-                                  color: Colors.green,
-                                  size: 22,
+                                  color: Colors.black, //(0xFF4876FF darker blue)
+                                  size: 17,
                                 ),
                               ),
                             ),

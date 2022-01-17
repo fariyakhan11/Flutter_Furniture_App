@@ -27,10 +27,16 @@ class Feeds extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).cardColor,
         title: Text('Feeds'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [ColorConsts.starterColor,
+                    ColorConsts.endcolor])),
+        ),
         actions: [
           Consumer<FavsProvider>(
                     builder: (_, favs, ch) => Badge(
-                      badgeColor: ColorConsts.cartBadgeColor,
+                      badgeColor: ColorConsts.favBadgeColor,
                       badgeContent: Text(
                         favs.getFavsItems.length.toString(),
                         style: TextStyle(color: Colors.white),
