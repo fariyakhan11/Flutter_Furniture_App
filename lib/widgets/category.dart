@@ -15,37 +15,37 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     {
       'categoryName': 'Phones',
       'categoryImagesPath':
-          'https://cdn.pixabay.com/photo/2022/01/01/18/37/butterfly-6908608__340.jpg',
+          'https://img.freepik.com/free-vector/realistic-phono-device_52683-29765.jpg?size=338&ext=jpg',
     },
     {
       'categoryName': 'Clothes',
       'categoryImagesPath':
-          'https://cdn.pixabay.com/photo/2021/12/19/12/27/road-6881040__480.jpg',
+          'https://thumbs.dreamstime.com/b/blue-oversize-knit-sweater-hanger-fresh-plants-isolated-abstract-colorful-background-composition-clothes-banner-concept-189223692.jpg',
     },
     {
       'categoryName': 'Shoes',
       'categoryImagesPath':
-          'https://cdn.pixabay.com/photo/2021/11/21/22/08/british-shorthair-6815375__340.jpg'
+          'https://media.gq.com/photos/588232d7402b722e7ade3045/3:2/w_3000,h_2000,c_limit/adidas-ultra-boost-01-2.jpg'
     },
     {
-      'categoryName': 'Beauty&Health',
+      'categoryName': 'Health & Beauty',
       'categoryImagesPath':
-          'https://cdn.pixabay.com/photo/2021/12/29/19/02/peter-6902548__340.jpg'
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrSKTVGSDEAFAOL2hurOr96FazRwFg5uv-cDhyuaL5massNC3dwEr4f5nUkU6OLbKaUnM&usqp=CAU'
     },
     {
       'categoryName': 'Laptops',
       'categoryImagesPath':
-          'https://cdn.pixabay.com/photo/2022/01/01/11/19/ice-6907394__340.jpg',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW4QcWiFX_uNbfiymb4GlBjFDOquY9d_8h3A&usqp=CAU',
     },
     {
       'categoryName': 'Furniture',
       'categoryImagesPath':
-          'https://cdn.pixabay.com/photo/2020/03/26/09/01/snow-4969648__340.jpg',
+          'https://www.blueloft.com/alexandria/uploads/sliders/OGXsZw1588581236.png',
     },
     {
       'categoryName': 'Watches',
       'categoryImagesPath':
-          'https://cdn.pixabay.com/photo/2021/12/27/01/30/christmas-6896107__340.jpg',
+          'https://royalwrist.pk/wp-content/uploads/2021/09/slider-3.jpg',
     }
   ];
 

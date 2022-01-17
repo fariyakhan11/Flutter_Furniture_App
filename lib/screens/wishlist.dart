@@ -19,6 +19,12 @@ class WishlistScreen extends StatelessWidget {
         : Scaffold(
             appBar: AppBar(
               title: Text('Wishlist (${favsProvider.getFavsItems.length})'),
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [ColorConsts.starterColor,
+                          ColorConsts.endcolor])),
+              ),
               actions: [
                 IconButton(
                   onPressed: () {

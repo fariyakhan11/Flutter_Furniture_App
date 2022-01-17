@@ -21,6 +21,12 @@ class CartScreen extends StatelessWidget {
             bottomSheet: checkoutSection(context, cartProvider.totalAmount),
             appBar: AppBar(
               title: Text('Cart (${cartProvider.getCartItems.length})'),
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [ColorConsts.starterColor,
+                                 ColorConsts.endcolor])),
+              ),
               actions: [
                 IconButton(
                   onPressed: () {
@@ -71,19 +77,19 @@ class CartScreen extends StatelessWidget {
                 flex: 2,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(15),
                     gradient: LinearGradient(colors: [
                       ColorConsts.gradiendLStart,
                       ColorConsts.gradiendLEnd,
                     ], stops: [
                       0.0,
-                      0.7
+                      0.8
                     ]),
                   ),
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(15),
                       onTap: () {},
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -112,7 +118,7 @@ class CartScreen extends StatelessWidget {
                 'US \$${subtotal.toStringAsFixed(2)}',
                 //textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: Colors.blue,
+                    color: Color(0xFF4876FF), //(0xFF4876FF darker blue)
                     fontSize: 18,
                     fontWeight: FontWeight.w500),
               ),

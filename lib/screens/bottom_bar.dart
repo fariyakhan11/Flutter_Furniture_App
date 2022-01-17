@@ -79,7 +79,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
               onTap: _selectPage,
               backgroundColor: Theme.of(context).primaryColor,
               unselectedItemColor: Theme.of(context).textSelectionColor,
-              selectedItemColor: Colors.purple,
+              selectedItemColor: Color(0xFFbf94e4),
               currentIndex: _selectPageIndex,
               selectedLabelStyle: TextStyle(fontSize: 14),
               items: [
@@ -88,7 +88,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                     label: 'Home'
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(MyAppIcons.rss),
+                    icon: Icon(MyAppIcons.bag),
                     label: 'Feeds'
                 ),
                 BottomNavigationBarItem(
@@ -105,7 +105,6 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                     label: 'User'
                 ),
               ],
-
             ),
           ),
         ),
