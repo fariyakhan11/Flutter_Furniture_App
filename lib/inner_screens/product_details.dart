@@ -12,7 +12,6 @@ import 'package:ecommerce_app/widgets/feeds_products.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 class ProductDetails extends StatefulWidget {
   static const routeName = '/ProductDetails';
 
