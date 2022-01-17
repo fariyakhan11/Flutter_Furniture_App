@@ -1,20 +1,24 @@
-
-
 import 'package:ecommerce_app/consts/colors.dart';
 import 'package:ecommerce_app/consts/my_icons.dart';
+import 'package:ecommerce_app/inner_screens/product_details.dart';
 import 'package:ecommerce_app/provider/cart_provider.dart';
 import 'package:ecommerce_app/provider/dark_theme_provider.dart';
 import 'package:ecommerce_app/provider/favs_provider.dart';
+import 'package:ecommerce_app/provider/products.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:provider/provider.dart';
 
 class FeedDialog extends StatelessWidget {
   final String productId;
-  const FeedDialog({required this.productId});
+  const FeedDialog({@required this.productId = ""});
 
   @override
   Widget build(BuildContext context) {
+    final productsData = Provider.of<Products>(context, listen: false);
+    final cartProvider = Provider.of<CartProvider>(context);
+    final favsProvider = Provider.of<FavsProvider>(context);
+    final prodAttr = productsData.findById(productId);
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -32,7 +36,7 @@ class FeedDialog extends StatelessWidget {
               color: Theme.of(context).scaffoldBackgroundColor,
             ),
             child: Image.network(
-              'https://images-na.ssl-images-amazon.com/images/I/61utX8kBDlL.jpg',
+              prodAttr.imageUrl,
             ),
           ),
           Container(
@@ -41,13 +45,48 @@ class FeedDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Flexible(
-                    child: dialogContent(context, 0, () {}),
+                    child: dialogContent(
+                      context,
+                      0,
+                      () => {
+                        favsProvider.addAndRemoveFromFav(productId,
+                            prodAttr.price, prodAttr.title, prodAttr.imageUrl),
+                        Navigator.canPop(context)
+                            ? Navigator.pop(context)
+                            : null
+                      },
+                    ),
                   ),
                   Flexible(
-                    child: dialogContent(context, 1, () {}),
+                    child: dialogContent(
+                        context,
+                        1,
+                        () => {
+                              Navigator.pushNamed(
+                                      context, ProductDetails.routeName,
+                                      arguments: prodAttr.id)
+                                  .then((value) => Navigator.canPop(context)
+                                      ? Navigator.pop(context)
+                                      : null),
+                            }),
                   ),
                   Flexible(
-                    child: dialogContent(context, 2, () {}),
+                    child: dialogContent(
+                      context,
+                      2,
+                      cartProvider.getCartItems.containsKey(productId)
+                          ? () {}
+                          : () {
+                              cartProvider.addProductToCart(
+                                  productId,
+                                  prodAttr.price,
+                                  prodAttr.title,
+                                  prodAttr.imageUrl);
+                              Navigator.canPop(context)
+                                  ? Navigator.pop(context)
+                                  : null;
+                            },
+                    ),
                   ),
                 ]),
           ),
@@ -107,7 +146,9 @@ class FeedDialog extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => fct,
+          onTap: () {
+            fct();
+          },
           splashColor: Colors.grey,
           child: Container(
             width: MediaQuery.of(context).size.width * 0.25,
