@@ -10,8 +10,7 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/zocial_icons.dart';
 
 class BottomBarScreen extends StatefulWidget {
-  const BottomBarScreen({Key? key}) : super(key: key);
-
+  static const routeName = '/BottomBarScreen';
   @override
   _BottomBarScreenState createState() => _BottomBarScreenState();
 }
@@ -26,19 +25,19 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   void initState() {
     _pages = [
       {
-        'page' : Home(),
+        'page': Home(),
       },
       {
-        'page' : Feeds(),
+        'page': Feeds(),
       },
       {
-        'page' : Search(),
+        'page': Search(),
       },
       {
-        'page' : CartScreen(),
+        'page': CartScreen(),
       },
       {
-        'page' : UserInfo(),
+        'page': UserInfo(),
       },
     ];
     super.initState();
@@ -60,7 +59,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       body: _pages[_selectPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomAppBar(
         //color: Colors.white,
-        shape:  CircularNotchedRectangle(),
+        shape: CircularNotchedRectangle(),
         notchMargin: 0.01,
         clipBehavior: Clip.antiAlias,
         child: Container(
@@ -84,33 +83,22 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
               selectedLabelStyle: TextStyle(fontSize: 14),
               items: [
                 BottomNavigationBarItem(
-                    icon: Icon(MyAppIcons.home),
-                    label: 'Home'
-                ),
+                    icon: Icon(MyAppIcons.home), label: 'Home'),
                 BottomNavigationBarItem(
-                    icon: Icon(MyAppIcons.bag),
-                    label: 'Feeds'
-                ),
+                    icon: Icon(MyAppIcons.bag), label: 'Feeds'),
                 BottomNavigationBarItem(
-                    activeIcon: null,
-                    icon: Icon(null),
-                    label: 'Search'
-                ),
+                    activeIcon: null, icon: Icon(null), label: 'Search'),
                 BottomNavigationBarItem(
-                    icon: Icon(MyAppIcons.cart),
-                    label: 'Cart'
-                ),
+                    icon: Icon(MyAppIcons.cart), label: 'Cart'),
                 BottomNavigationBarItem(
-                    icon: Icon(MyAppIcons.user),
-                    label: 'User'
-                ),
+                    icon: Icon(MyAppIcons.user), label: 'User'),
               ],
             ),
           ),
         ),
       ),
       floatingActionButtonLocation:
-      FloatingActionButtonLocation.miniCenterDocked,
+          FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton(
@@ -120,11 +108,10 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           elevation: 4,
           child: Icon(MyAppIcons.search),
           onPressed: () => setState(() {
-            _selectPageIndex =2;
+            _selectPageIndex = 2;
           }),
         ),
       ),
     );
   }
 }
-

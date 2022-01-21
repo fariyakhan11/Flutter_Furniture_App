@@ -18,18 +18,14 @@ class UserInfo extends StatefulWidget {
 }
 
 class _UserInfoState extends State<UserInfo> {
-
   late ScrollController _scrollController;
   var top = 0.0;
   @override
-
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
@@ -38,171 +34,185 @@ class _UserInfoState extends State<UserInfo> {
     final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
         body: Stack(
-          children: [
-            CustomScrollView(
-              controller: _scrollController,
-              slivers: [
-                SliverAppBar(
-                  //automaticallyImplyLeading: false,
-                  //controls the shadow that appears below the appBar when the users moves downwards
-                  elevation: 4,
-                  //controls the height of the appBar i.e. is the user image box in this case
-                  expandedHeight: 200,
-                  pinned: true,
-                  flexibleSpace: LayoutBuilder(
-                    builder: (BuildContext context, BoxConstraints constraints) {
-                      top = constraints.biggest.height;
-                      return Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [
-                                ColorConsts.starterColor,
-                                ColorConsts.endcolor,
-                              ],
-                              begin: const FractionalOffset(0.0, 0.0),
-                              end: const FractionalOffset(1.0, 0.0),
-                              stops: [0.0, 1.0],
-                              tileMode: TileMode.clamp),
-                        ),
-                        child: FlexibleSpaceBar(
-                          collapseMode: CollapseMode.parallax,
-                          centerTitle: true,
-                          title: AnimatedOpacity(
-                            opacity: top <= 110.0 ? 1.0 : 0,
-                            duration: Duration(microseconds: 300),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 12,
-                                ),
-                                Container(
-                                  height: kToolbarHeight / 1.8,
-                                  width: kToolbarHeight / 1.8,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.white,
-                                          blurRadius: 1.0,
-                                        ),
-                                      ],
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: NetworkImage(
-                                              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"))),
-                                ),
-                                SizedBox(
-                                  width: 12,
-                                ),
-                                Text(
-                                  //'top.toString()',
-                                  'Guest',
-                                  style: TextStyle(
-                                      fontSize: 20.0, color: Colors.white),
-                                ),
-                              ],
+      children: [
+        CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            SliverAppBar(
+              //automaticallyImplyLeading: false,
+              //controls the shadow that appears below the appBar when the users moves downwards
+              elevation: 4,
+              //controls the height of the appBar i.e. is the user image box in this case
+              expandedHeight: 200,
+              pinned: true,
+              flexibleSpace: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  top = constraints.biggest.height;
+                  return Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [
+                            ColorConsts.starterColor,
+                            ColorConsts.endcolor,
+                          ],
+                          begin: const FractionalOffset(0.0, 0.0),
+                          end: const FractionalOffset(1.0, 0.0),
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp),
+                    ),
+                    child: FlexibleSpaceBar(
+                      collapseMode: CollapseMode.parallax,
+                      centerTitle: true,
+                      title: AnimatedOpacity(
+                        opacity: top <= 110.0 ? 1.0 : 0,
+                        duration: Duration(microseconds: 300),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 12,
                             ),
-                          ),
-                          background: Image(
-                            image: NetworkImage(
-                                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: //TITLE WIDGET
-                        userTitle('User Bag'),
-                      ),
-                      Divider(
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.of(context).pushNamed(WishlistScreen.routeName);
-                          },
-                          splashColor: Colors.red,
-                          child: ListTile(
-                            title: Text('Wishlist'),
-                            trailing: Icon(Icons.chevron_right_rounded),
-                            leading: Icon(FontAwesome5.heart),
-                          ),
+                            Container(
+                              height: kToolbarHeight / 1.8,
+                              width: kToolbarHeight / 1.8,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      blurRadius: 1.0,
+                                    ),
+                                  ],
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"))),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Text(
+                              //'top.toString()',
+                              'Guest',
+                              style: TextStyle(
+                                  fontSize: 20.0, color: Colors.white),
+                            ),
+                          ],
                         ),
                       ),
-                      ListTile(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(CartScreen.routeName);
-                        },
-                        title: Text('Cart'),
-                        trailing: Icon(Icons.chevron_right_rounded),
-                        leading: Icon(FontAwesome5.shopping_cart),
+                      background: Image(
+                        image: NetworkImage(
+                            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'),
+                        fit: BoxFit.cover,
                       ),
-                      ListTile(
-                        title: Text('My Orders'),
-                        trailing: Icon(Icons.chevron_right_rounded),
-                        leading: Icon(FontAwesome5.shopping_bag),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: //TITLE WIDGET
-                        userTitle('User Info'),
-                      ),
-                      Divider(
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                      //USERLIST WIDGET
-                      userListTile(
-                          "Email", "Email Sub", FontAwesome5.envelope, context),
-                      userListTile("Phone", "4555", FontAwesome5.phone, context),
-                      userListTile(
-                          "Shipping Adddress", "xyz", Icons.local_shipping, context),
-                      userListTile("Joined Date", "date", Icons.watch_later, context),
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: //TITLE WIDGET
-                        userTitle('User Settings'),
-                      ),
-                      Divider(
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                      ListTileSwitch(
-                        value: themeChange.darkTheme,
-                        leading: Icon(FontAwesome5.moon),
-                        onChanged: (value) {
-                          setState(() {
-                            themeChange.darkTheme = value;
-                          });
-                        },
-                        switchType: SwitchType.material,
-                        switchActiveColor: Colors.indigo,
-                        title: Text('Theme'),
-                      ),
-                      userListTile(
-                          'Logout', '', FontAwesome5.sign_out_alt, context) // ListTileSwitch
-                    ],
-                  ),
-                ),
-
-              ],
+                    ),
+                  );
+                },
+              ),
             ),
-            _buildFab(),
+            SliverToBoxAdapter(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: //TITLE WIDGET
+                        userTitle('User Bag'),
+                  ),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(WishlistScreen.routeName);
+                      },
+                      splashColor: Colors.red,
+                      child: ListTile(
+                        title: Text('Wishlist'),
+                        trailing: Icon(Icons.chevron_right_rounded),
+                        leading: Icon(FontAwesome5.heart),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
+                    },
+                    title: Text('Cart'),
+                    trailing: Icon(Icons.chevron_right_rounded),
+                    leading: Icon(FontAwesome5.shopping_cart),
+                  ),
+                  ListTile(
+                    title: Text('My Orders'),
+                    trailing: Icon(Icons.chevron_right_rounded),
+                    leading: Icon(FontAwesome5.shopping_bag),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: //TITLE WIDGET
+                        userTitle('User Info'),
+                  ),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  //USERLIST WIDGET
+                  userListTile(
+                      "Email", "Email Sub", FontAwesome5.envelope, context),
+                  userListTile("Phone", "4555", FontAwesome5.phone, context),
+                  userListTile("Shipping Adddress", "xyz", Icons.local_shipping,
+                      context),
+                  userListTile(
+                      "Joined Date", "date", Icons.watch_later, context),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: //TITLE WIDGET
+                        userTitle('User Settings'),
+                  ),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  ListTileSwitch(
+                    value: themeChange.darkTheme,
+                    leading: Icon(FontAwesome5.moon),
+                    onChanged: (value) {
+                      setState(() {
+                        themeChange.darkTheme = value;
+                      });
+                    },
+                    switchType: SwitchType.material,
+                    switchActiveColor: Colors.indigo,
+                    title: Text('Theme'),
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      splashColor: Theme.of(context).splashColor,
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.canPop(context)
+                              ? Navigator.pop(context)
+                              : null;
+                        },
+                        title: Text('Logout'),
+                        leading: Icon(Icons.exit_to_app_rounded),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
-        )
-    );
+        ),
+        _buildFab(),
+      ],
+    ));
   }
 
   Widget _buildFab() {
