@@ -1,5 +1,8 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:ecommerce_app/consts/colors.dart';
 import 'package:ecommerce_app/consts/my_icons.dart';
+import 'package:ecommerce_app/inner_screens/upload_product_form.dart';
 import 'package:ecommerce_app/screens/cart.dart';
 import 'package:ecommerce_app/screens/feeds.dart';
 import 'package:ecommerce_app/screens/wishlist.dart';
@@ -136,7 +139,7 @@ class BackLayerMenu extends StatelessWidget {
                     text: 'Upload a new product',
                     index: 3,
                     //routeName: UploadScreen.routeName,
-                    routeName: Feeds.routeName),
+                    routeName: UploadProductForm.routeName),
               ],
             ),
           ),

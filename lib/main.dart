@@ -1,13 +1,18 @@
 import 'package:ecommerce_app/consts/theme_data.dart';
 import 'package:ecommerce_app/inner_screens/product_details.dart';
+import 'package:ecommerce_app/inner_screens/upload_product_form.dart';
 import 'package:ecommerce_app/provider/cart_provider.dart';
 import 'package:ecommerce_app/provider/dark_theme_provider.dart';
 import 'package:ecommerce_app/provider/favs_provider.dart';
 import 'package:ecommerce_app/provider/products.dart';
+import 'package:ecommerce_app/screens/auth/login.dart';
+import 'package:ecommerce_app/screens/auth/sign_up.dart';
 import 'package:ecommerce_app/screens/bottom_bar.dart';
 import 'package:ecommerce_app/screens/cart.dart';
 import 'package:ecommerce_app/screens/categories_feeds.dart';
 import 'package:ecommerce_app/screens/feeds.dart';
+import 'package:ecommerce_app/screens/landing_page.dart';
+import 'package:ecommerce_app/screens/main_screen.dart';
 import 'package:ecommerce_app/screens/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +66,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-            home: BottomBarScreen(),
+            home: MainScreens(),
             //initialRoute: '/',
             routes: {
               //   '/': (ctx) => LandingPage(),
@@ -71,6 +76,10 @@ class _MyAppState extends State<MyApp> {
               WishlistScreen.routeName: (ctx) => WishlistScreen(),
               ProductDetails.routeName: (ctx) => ProductDetails(),
               CategoriesFeedsScreen.routeName: (ctx) => CategoriesFeedsScreen(),
+              LoginScreen.routeName: (ctx) => LoginScreen(),
+              SignUpScreen.routeName: (ctx) => SignUpScreen(),
+              BottomBarScreen.routeName: (ctx) => BottomBarScreen(),
+              UploadProductForm.routeName: (ctx) => UploadProductForm(),
             },
           );
         }));
