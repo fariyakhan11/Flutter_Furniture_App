@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "362516740531",
-    "project_id": "flutter-furnitureapp",
-    "storage_bucket": "flutter-furnitureapp.appspot.com"
+    "project_number": "80099618161",
+    "project_id": "flutter-furnitureapp-a0b1c",
+    "storage_bucket": "flutter-furnitureapp-a0b1c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:362516740531:android:ee26c25ddf917bb141f3c6",
+        "mobilesdk_app_id": "1:80099618161:android:7172e8450b1b94113ddad0",
         "android_client_info": {
           "package_name": "com.example.ecommerce_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "362516740531-dk8lgkkpk40mld5p2mb6n9a93ol275sc.apps.googleusercontent.com",
+          "client_id": "80099618161-g34q45p0mdpndl0g312a216t4vjoebr9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecommerce_app",
+            "certificate_hash": "70462ba5042613cfc35aef9b3b2cac5eca8624b2"
+          }
+        },
+        {
+          "client_id": "80099618161-ksql9qdegnbdao5pit9hajsvni467928.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAmKu_Z1kbMVRO8WPo1bcLe7n2r7FLYhiM"
+          "current_key": "AIzaSyBcawqPLbkYLDXPpc-1S40Sh0NC_CynYNM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "362516740531-dk8lgkkpk40mld5p2mb6n9a93ol275sc.apps.googleusercontent.com",
+              "client_id": "80099618161-ksql9qdegnbdao5pit9hajsvni467928.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

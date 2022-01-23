@@ -2,12 +2,15 @@ import 'dart:io';
 import 'package:ecommerce_app/consts/colors.dart';
 import 'package:ecommerce_app/services/global_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routeName = '/SignUpScreen';
@@ -25,6 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _fullName = '';
   late int _phoneNumber;
   File? _pickedImage;
+  late String url;
   final _formKey = GlobalKey<FormState>();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -42,17 +46,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _submitForm() async {
-    final bool isValid = _formKey.currentState!.validate();
+    final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
+    var date = DateTime.now().toString();
+    var dateparse = DateTime.parse(date);
+    var formattedDate ="${dateparse.day}-${dateparse.month}-${dateparse.year}";
     if (isValid) {
+      _formKey.currentState!.save();
       setState(() {
         _isLoading = true;
       });
-      _formKey.currentState!.save();
       try {
         await _auth.createUserWithEmailAndPassword(
             email: _emailAddress.toLowerCase().trim(),
             password: _password.trim());
+        final User? user = _auth.currentUser;
+        final _uid = user!.uid;
+        await FirebaseFirestore.instance.collection('users').doc(_uid).set({
+          'id': _uid,
+          'name': _fullName,
+          'email': _emailAddress,
+          'phoneNumber': _phoneNumber,
+          'imageurl': "",
+          'joinedAt': formattedDate,
+          'createdAt': Timestamp.now(),
+        });
+        Navigator.canPop(context) ? Navigator.pop(context) : null;
       } on FirebaseAuthException catch ( error) {
         _globalMethods.authErrorHandle(error.message, context);
         print('Error has occurred: ${error.message}');
@@ -61,12 +80,47 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _isLoading = false;
         });
       }
+      //-------------------IMAGE UPLOAD---------------------------------------------
+      /*try {
+        if(_pickedImage == null){
+          _globalMethods.authErrorHandle('Please pick an image', context);
+        } else {
+          setState(() {
+            _isLoading = true;
+          });
+          final ref = FirebaseStorage.instance.ref().child('usersImages').child(_fullName + '.jpg');
+          await ref.putFile(_pickedImage!);
+          url = await ref.getDownloadURL();
+          await _auth.createUserWithEmailAndPassword(
+              email: _emailAddress.toLowerCase().trim(),
+              password: _password.trim());
+          final User? user = _auth.currentUser;
+          final _uid = user!.uid;
+          await FirebaseFirestore.instance.collection('users').doc(_uid).set({
+            'id': _uid,
+            'name': _fullName,
+            'email': _emailAddress,
+            'phoneNumber': _phoneNumber,
+            'imageurl': url,
+            'joinedAt': formattedDate,
+            'createdAt': Timestamp.now(),
+          });
+          Navigator.canPop(context) ? Navigator.pop(context) : null;
+        }
+      } on FirebaseAuthException catch ( error) {
+        _globalMethods.authErrorHandle(error.message, context);
+        print('Error has occurred: ${error.message}');
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }*/
     }
   }
 
   void _pickImageCamera() async {
     final picker = ImagePicker();
-    final pickedImage = await picker.getImage(source: ImageSource.camera);
+    final pickedImage = await picker.getImage(source: ImageSource.camera, imageQuality: 10);
     final pickedImageFile = File(pickedImage!.path);
     setState(() {
       _pickedImage = pickedImageFile;
@@ -349,6 +403,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               }
                               return null;
                             },
+                            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                             textInputAction: TextInputAction.next,
                             onEditingComplete: _submitForm,
                             keyboardType: TextInputType.phone,
@@ -410,8 +465,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 }
 
-@override
-Widget build(BuildContext context) {
-  // TODO: implement build
-  throw UnimplementedError();
-}
+

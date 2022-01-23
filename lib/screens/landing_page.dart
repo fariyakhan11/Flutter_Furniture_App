@@ -2,9 +2,13 @@ import 'package:ecommerce_app/consts/colors.dart';
 import 'package:ecommerce_app/screens/auth/login.dart';
 import 'package:ecommerce_app/screens/auth/sign_up.dart';
 import 'package:ecommerce_app/screens/bottom_bar.dart';
+import 'package:ecommerce_app/services/global_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluttericon/entypo_icons.dart';
+
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -21,6 +25,10 @@ class _LandingPageState extends State<LandingPage>
     'https://e-shopy.org/wp-content/uploads/2020/08/shop.jpeg',
     'https://e-shopy.org/wp-content/uploads/2020/08/shop.jpeg',
   ];
+
+  //SIGN IN WITH GOOGLE
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  GlobalMethods _globalMethods = GlobalMethods();
   @override
   void initState() {
     super.initState();
@@ -45,6 +53,26 @@ class _LandingPageState extends State<LandingPage>
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  //GOOGLE SIGN IN
+  Future<void> _googleSignIn() async {
+    final googleSignIn = GoogleSignIn();
+    final googleAccount = await googleSignIn.signIn();
+    if (googleAccount != null) {
+      final googleAuth = await googleAccount.authentication;
+      if (googleAuth.accessToken != null && googleAuth.idToken != null) {
+        try {
+          final authResult = await _auth.signInWithCredential(
+              GoogleAuthProvider.credential(
+                  idToken: googleAuth.idToken,
+                  accessToken: googleAuth.accessToken));
+        } on FirebaseAuthException catch (error) {
+          _globalMethods.authErrorHandle(error.message, context);
+          //print('Error has occurred: ${error.message}');
+        }
+      }
+    }
   }
 
   @override
@@ -204,7 +232,7 @@ class _LandingPageState extends State<LandingPage>
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               OutlineButton(
-                onPressed: () {},
+                onPressed: _googleSignIn,
                 shape: StadiumBorder(),
                 highlightedBorderColor: Colors.red.shade200,
                 borderSide: BorderSide(width: 2, color: Colors.red),
