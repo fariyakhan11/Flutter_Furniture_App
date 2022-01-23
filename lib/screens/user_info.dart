@@ -3,6 +3,7 @@ import 'package:ecommerce_app/consts/my_icons.dart';
 import 'package:ecommerce_app/provider/dark_theme_provider.dart';
 import 'package:ecommerce_app/screens/cart.dart';
 import 'package:ecommerce_app/screens/wishlist.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
@@ -20,6 +21,9 @@ class UserInfo extends StatefulWidget {
 class _UserInfoState extends State<UserInfo> {
   late ScrollController _scrollController;
   var top = 0.0;
+
+  //----HANDLE LOGOUT
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void initState() {
     super.initState();
@@ -195,10 +199,46 @@ class _UserInfoState extends State<UserInfo> {
                     child: InkWell(
                       splashColor: Theme.of(context).splashColor,
                       child: ListTile(
-                        onTap: () {
-                          Navigator.canPop(context)
-                              ? Navigator.pop(context)
-                              : null;
+                        onTap: () async {
+                          // Navigator.canPop(context)
+                          //     ? Navigator.pop(context)
+                          //     : null;
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext ctx) {
+                                return AlertDialog(
+                                  title: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(right: 6.0),
+                                        child: Image.network(
+                                          'https://image.flaticon.com/icons/png/128/1828/1828304.png',
+                                          height: 20,
+                                          width: 20,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text('Sign Out:'),
+                                      ),
+                                    ],
+                                  ),
+                                  content: Text('Do you want to Sign Out?'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () async{
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Cancel')),
+
+                                    TextButton(
+                                        onPressed: () async{
+                                          await _auth.signOut().then((value) => Navigator.pop(context));
+                                        },
+                                        child: Text('OK')),
+                                  ],
+                                );
+                              });
                         },
                         title: Text('Logout'),
                         leading: Icon(Icons.exit_to_app_rounded),
